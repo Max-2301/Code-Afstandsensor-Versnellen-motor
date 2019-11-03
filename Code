@@ -1,0 +1,25 @@
+input.onLoudSound(function () {
+    sound = 1
+    music.siren.loop()
+})
+let distance = 0
+let go = 0
+let sound = 0
+while (sound == 1) {
+    pins.A1.servoWrite(go)
+}
+loops.forever(function () {
+    console.log(distance)
+    pins.A2.digitalWrite(false)
+    control.waitMicros(2)
+    pins.A2.digitalWrite(true)
+    control.waitMicros(10)
+    pins.A2.digitalWrite(false)
+    distance = pins.A3.pulseIn(PulseValue.High) / 58
+    if (distance >= 0 && distance <= 10) {
+        go = 180
+    } else {
+        go = 110
+    }
+    pause(100)
+})
